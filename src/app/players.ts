@@ -2,7 +2,8 @@ import { Player } from "./types/Player";
 
 export const players: Player[] = [
   {
-    name: "Laele",
+    id: 1,
+    name: "guilerme",
     skills: {
       arcana: 1,
       history: 1,
@@ -14,6 +15,7 @@ export const players: Player[] = [
     },
   },
   {
+    id: 2,
     name: "well",
     skills: {
       arcana: 1,
@@ -26,6 +28,7 @@ export const players: Player[] = [
     },
   },
   {
+    id: 3,
     name: "karol",
     skills: {
       arcana: 1,
@@ -38,6 +41,7 @@ export const players: Player[] = [
     },
   },
   {
+    id: 4,
     name: "debora",
     skills: {
       arcana: 1,

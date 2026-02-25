@@ -17,6 +17,10 @@
   - [ ] When deleting a player
   - [ ] When editing a player
 
+#### Internal
+
+- [ ] Add global state for players
+
 ### New features
 
 - [ ] Add login system

@@ -1,18 +1,28 @@
 "use client";
 
-import { PersonAddAlt1Sharp } from "@mui/icons-material";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
-import Table from "./components/Table";
 import { addPlayer } from "../services/player/add";
 import { getAllPlayers } from "../services/player/getAll";
+import { NewPlayerButton } from "./components/NewPlayerButton/NewPlayerButton";
+import Table from "./components/Table";
+import { Player } from "./types/Player";
 
 export default function Home() {
-  const [players, setPlayers] = useState(getAllPlayers());
+  const [players, setPlayers] = useState<Player[]>([]);
+
+  // TODO: fix this
+  useEffect(() => {
+    setPlayers(getAllPlayers());
+  }, []);
 
   const handleAddPlayer = () => {
+    const lastPlayerId = players[players.length - 1]?.id || 0;
+    const newId = lastPlayerId + 1;
+
     addPlayer({
-      name: `novopersonagem${Math.floor(Math.random() * 100) + 1}`,
+      id: newId,
+      name: `Player ${newId}`,
       skills: {
         arcana: 0,
         history: 0,
@@ -33,19 +43,19 @@ export default function Home() {
         <span className="text-orange-700 text-xl font-bold">
           Aplicativo da sara
         </span>
-        <div className="flex gap-1">
-          <button
-            className="p-2 text-center rounded-md border border-orange-700 flex items-center gap-1"
-            onClick={handleAddPlayer}
-          >
-            Novo personagem
-            <PersonAddAlt1Sharp />
-          </button>
-        </div>
+        {players.length > 0 && (
+          <div className="flex gap-1">
+            <NewPlayerButton onAddPlayer={handleAddPlayer} />
+          </div>
+        )}
       </header>
       <main className="flex-1 flex flex-col">
         <div className="px-4">
-          <Table players={players} />
+          <Table
+            players={players}
+            setPlayers={setPlayers}
+            onAddPlayer={handleAddPlayer}
+          />
         </div>
       </main>
       <footer className="flex justify-center p-4 border-t border-t-gray-500">
